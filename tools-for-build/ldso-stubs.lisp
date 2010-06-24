@@ -113,18 +113,18 @@ ldso_stub__ ## fct: ;                           \\
 #!+(and darwin ppc) "
 #define LDSO_STUBIFY(fct)                       @\\
 .text                                           @\\
-.globl  _ldso_stub___ ## fct                     @\\
-_ldso_stub___ ## fct:                            @\\
-        b ldso_stub__ ## fct ## stub            @\\
-.symbol_stub ldso_stub__ ## fct ## stub:        @\\
+.globl  _ldso_stub__ ## fct                      @\\
+_ldso_stub__ ## fct:                             @\\
+        b _ldso_stub__ ## fct ## stub            @\\
+.symbol_stub _ldso_stub__ ## fct ## stub:        @\\
 .indirect_symbol _ ## fct                       @\\
-        lis     r11,ha16(ldso_stub__ ## fct ## $lazy_ptr)       @\\
-        lwz     r12,lo16(ldso_stub__ ## fct ## $lazy_ptr)(r11)  @\\
+        lis     r11,ha16(_ldso_stub__ ## fct ## $lazy_ptr)       @\\
+        lwz     r12,lo16(_ldso_stub__ ## fct ## $lazy_ptr)(r11)  @\\
         mtctr   r12                             @\\
-        addi    r11,r11,lo16(ldso_stub__ ## fct ## $lazy_ptr)   @\\
+        addi    r11,r11,lo16(_ldso_stub__ ## fct ## $lazy_ptr)   @\\
         bctr                                    @\\
 .lazy_symbol_pointer                            @\\
-ldso_stub__ ## fct ## $lazy_ptr:                @\\
+_ldso_stub__ ## fct ## $lazy_ptr:                @\\
         .indirect_symbol _ ## fct               @\\
         .long dyld_stub_binding_helper"
 
@@ -324,7 +324,6 @@ ldso_stub__ ## fct: ;                  \\
                    "unlockpt")
                  #!+openbsd
                  '("openpty")
-                 #!-dlshim
                  '("dlclose"
                    "dlerror"
                    "dlopen"

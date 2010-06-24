@@ -36,16 +36,8 @@
   #include <sys/wait.h>
   #include <sys/ioctl.h>
   #include <sys/termios.h>
-  #ifdef LISP_FEATURE_DARWIN
-    #include "../src/runtime/darwin-langinfo.h"
-  #else
-    #include <langinfo.h>
-  #endif
-  #ifdef LISP_FEATURE_DLSHIM
-    #include "../src/runtime/darwin-dlshim.h"
-  #else
-    #include <dlfcn.h>
-  #endif
+  #include <langinfo.h>
+  #include <dlfcn.h>
 #endif
 
 #include <sys/stat.h>
